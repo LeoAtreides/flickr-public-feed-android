@@ -1,4 +1,4 @@
-package com.developer.davidtc.flickrpublicfeedandroid.rest.response;
+package com.developer.davidtc.flickrpublicfeedandroid.rest.publicfeed.response;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -14,8 +14,6 @@ public abstract class FeedItemResponse {
     public abstract String title();
 
     public abstract String link();
-
-    public abstract MediaResponse media();
 
     public abstract String publishedDate();
 

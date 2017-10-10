@@ -1,4 +1,4 @@
-package com.developer.davidtc.flickrpublicfeedandroid.rest.response;
+package com.developer.davidtc.flickrpublicfeedandroid.rest.publicfeed.response;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
