@@ -40,7 +40,8 @@ public final class RetrofitServiceGenerator {
                     .connectTimeout(1, TimeUnit.MINUTES)
                     .writeTimeout(1, TimeUnit.MINUTES)
                     .readTimeout(1, TimeUnit.MINUTES)
-                    .addInterceptor(new HeaderFormatInterceptor());
+                    .addInterceptor(new HeaderFormatInterceptor())
+                    .addInterceptor(new ReplaceUselessCharsEnvelopeInterceptor());
             if (BuildConfig.DEBUG) {
                 builder.addInterceptor(
                         new HttpLoggingInterceptor()

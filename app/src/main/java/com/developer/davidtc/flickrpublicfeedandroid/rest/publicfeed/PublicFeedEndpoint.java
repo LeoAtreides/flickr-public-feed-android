@@ -13,7 +13,10 @@ import retrofit2.http.Headers;
  */
 
 public interface PublicFeedEndpoint {
-    @Headers("format: json")
+    @Headers({
+            "format: json",
+            "uselessContent: jsonFlickrFeed(, ;}), }"
+    })
     @GET("feeds/photos_public.gne")
     Single<PublicFeedResponse> getPublicFeed();
 }
