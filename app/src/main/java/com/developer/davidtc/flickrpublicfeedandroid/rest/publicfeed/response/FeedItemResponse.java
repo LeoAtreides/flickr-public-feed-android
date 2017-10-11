@@ -1,5 +1,7 @@
 package com.developer.davidtc.flickrpublicfeedandroid.rest.publicfeed.response;
 
+import android.support.annotation.Nullable;
+
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
@@ -15,6 +17,7 @@ public abstract class FeedItemResponse {
 
     public abstract String link();
 
+    @Nullable
     public abstract String publishedDate();
 
     public abstract String author();
