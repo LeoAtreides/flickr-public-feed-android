@@ -1,6 +1,9 @@
 package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BindingAdapter;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,5 +60,17 @@ public final class PublicFeedBindings {
         textView.setText(
                 SimpleDateFormat.getDateTimeInstance()
                         .format(date));
+    }
+
+    @BindingAdapter("launchExternal")
+    public static void bindLaunchExternal(ImageView imageView, String link) {
+        imageView.setOnClickListener(v -> {
+            Context context = v.getContext();
+            Uri webPage = Uri.parse(link);
+            Intent intent = new Intent(Intent.ACTION_VIEW, webPage);
+            if (intent.resolveActivity(context.getPackageManager()) != null) {
+                context.startActivity(intent);
+            }
+        });
     }
 }
