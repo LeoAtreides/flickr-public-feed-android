@@ -23,7 +23,9 @@ allprojects {
 }
 
 ext {
+    supporLibraryVersion = '26.1.0'
     retrofitVersion = '2.3.0'
+    glideVersion = '4.2.0'
 }
 
 task clean(type: Delete) {
