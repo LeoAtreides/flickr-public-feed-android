@@ -1,3 +1,7 @@
 <resources>
 	<string name="app_name">Flickr Public Feed Android</string>
+	<string name="user">User</string>
+	<string name="publication_date">Publication Date</string>
+	<string name="tags">Tags</string>
+	<string name="launch_in_external_browser">Launch in external browser</string>
 </resources>
