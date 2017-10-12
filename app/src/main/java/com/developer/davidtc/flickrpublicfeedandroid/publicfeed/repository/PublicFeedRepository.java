@@ -68,8 +68,9 @@ public final class PublicFeedRepository {
     }
 
     private String buildAuthor(String responseAuthor) {
-        //TODO extract the author
-        return responseAuthor;
+        int startIndex = responseAuthor.indexOf("(\"");
+        int endIndex = responseAuthor.lastIndexOf("\")");
+        return responseAuthor.substring(startIndex + 2, endIndex);
     }
 
     private List<String> buildTags(FeedItemResponse feedItemResponse) {
