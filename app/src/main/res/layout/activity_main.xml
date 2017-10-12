@@ -11,11 +11,17 @@
 
 	</data>
 
-	<android.support.v7.widget.RecyclerView
+	<android.support.design.widget.CoordinatorLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="vertical"
-		app:layoutManager="LinearLayoutManager"
-		tools:listitem="@layout/item_public_feed"
-		app:publicFeedList="@{viewModel.items}" />
+		app:errorFeedback="@{viewModel.errorState}">
+
+		<android.support.v7.widget.RecyclerView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layoutManager="LinearLayoutManager"
+			app:publicFeedList="@{viewModel.items}"
+			tools:listitem="@layout/item_public_feed" />
+	</android.support.design.widget.CoordinatorLayout>
 </layout>

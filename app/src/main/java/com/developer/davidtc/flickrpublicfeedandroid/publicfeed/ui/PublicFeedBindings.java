@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.developer.davidtc.flickrpublicfeedandroid.R;
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem;
 import com.squareup.picasso.Picasso;
 
@@ -72,5 +75,13 @@ public final class PublicFeedBindings {
                 context.startActivity(intent);
             }
         });
+    }
+
+    @BindingAdapter("errorFeedback")
+    public static void bindErrorFeedback(View view, Throwable errorState) {
+        if (errorState != null) {
+            Snackbar.make(view, R.string.error_loading, Snackbar.LENGTH_LONG)
+                    .show();
+        }
     }
 }

@@ -4,4 +4,5 @@
 	<string name="publication_date">Publication Date</string>
 	<string name="tags">Tags</string>
 	<string name="launch_in_external_browser">Launch in external browser</string>
+	<string name="error_loading">There was an error loading your data :( Scroll down to refresh and try again.</string>
 </resources>

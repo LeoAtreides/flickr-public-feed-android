@@ -36,9 +36,11 @@ public final class PublicFeedViewModel extends ViewModel {
                 publicFeedRepository.getItems()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe((feedItems, throwable) -> {
-                            items.clear();
-                            items.addAll(feedItems);
                             errorState.set(throwable);
+                            items.clear();
+                            if (feedItems != null) {
+                                items.addAll(feedItems);
+                            }
                         }));
     }
 
