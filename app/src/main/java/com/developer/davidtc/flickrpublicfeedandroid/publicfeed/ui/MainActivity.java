@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.activity_main);
         binding.setViewModel(publicFeedViewModel);
 
+        setSupportActionBar(binding.mainToolbar);
+
         publicFeedViewModel.refreshItems();
     }
 }
