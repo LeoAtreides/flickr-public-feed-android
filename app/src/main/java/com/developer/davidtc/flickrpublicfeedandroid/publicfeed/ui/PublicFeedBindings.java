@@ -3,6 +3,7 @@ package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem;
 import com.squareup.picasso.Picasso;
@@ -33,5 +34,15 @@ public final class PublicFeedBindings {
                 .fit()
                 .centerCrop()
                 .into(imageView);
+    }
+
+    @BindingAdapter("itemTags")
+    public static void bindTags(TextView textView, List<String> tags) {
+        StringBuilder tagsBuilder = new StringBuilder();
+        for (String tag : tags) {
+            tagsBuilder.append(tag);
+            tagsBuilder.append(" ");
+        }
+        textView.setText(tagsBuilder.toString());
     }
 }
