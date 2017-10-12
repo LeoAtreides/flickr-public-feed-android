@@ -2,8 +2,10 @@ package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,5 +24,14 @@ public final class PublicFeedBindings {
         }
         recyclerView.setAdapter(
                 new FeedItemsAdapter(items, recyclerView.getContext()));
+    }
+
+    @BindingAdapter("imageBind")
+    public static void bindImage(ImageView imageView, String imageUrl) {
+        Picasso.with(imageView.getContext())
+                .load(imageUrl)
+                .fit()
+                .centerCrop()
+                .into(imageView);
     }
 }

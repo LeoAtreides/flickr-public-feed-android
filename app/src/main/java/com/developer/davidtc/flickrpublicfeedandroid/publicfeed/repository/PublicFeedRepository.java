@@ -40,15 +40,15 @@ public final class PublicFeedRepository {
         return publicFeedEndpoint.getPublicFeed()
                 .toObservable()
                 .flatMapIterable(PublicFeedResponse::items)
-                .map(feedItemResponse -> {
-                    return FeedItem.builder()
-                            .title(feedItemResponse.title())
-                            .link(feedItemResponse.media().mediaUrl())
-                            .publishedDate(parseDate(feedItemResponse.publishedDate()))
-                            .author(buildAuthor(feedItemResponse.author()))
-                            .tags(buildTags(feedItemResponse))
-                            .build();
-                })
+                .map(feedItemResponse ->
+                        FeedItem.builder()
+                                .title(feedItemResponse.title())
+                                .imageUrl(feedItemResponse.media().mediaUrl())
+                                .link(feedItemResponse.link())
+                                .publishedDate(parseDate(feedItemResponse.publishedDate()))
+                                .author(buildAuthor(feedItemResponse.author()))
+                                .tags(buildTags(feedItemResponse))
+                                .build())
                 .toList()
                 .subscribeOn(Schedulers.io());
     }

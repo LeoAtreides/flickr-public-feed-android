@@ -26,6 +26,7 @@
 			app:layout_constraintDimensionRatio="1:1"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/item_public_feed_user_image"
+			app:imageBind="@{itemViewModel.item.imageUrl}"
 			app:srcCompat="@mipmap/ic_launcher" />
 
 		<TextView

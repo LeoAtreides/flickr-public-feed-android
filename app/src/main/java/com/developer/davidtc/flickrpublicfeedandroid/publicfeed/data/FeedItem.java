@@ -18,6 +18,8 @@ public abstract class FeedItem {
 
     public abstract String link();
 
+    public abstract String imageUrl();
+
     @Nullable
     public abstract Date publishedDate();
 
@@ -35,6 +37,8 @@ public abstract class FeedItem {
         public abstract Builder title(String value);
 
         public abstract Builder link(String value);
+
+        public abstract Builder imageUrl(String value);
 
         public abstract Builder publishedDate(Date value);
 
