@@ -12,16 +12,26 @@
 	</data>
 
 	<android.support.design.widget.CoordinatorLayout
+		android:id="@+id/main_coordinator"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		app:errorFeedback="@{viewModel.errorState}">
 
-		<android.support.v7.widget.RecyclerView
+		<android.support.v4.widget.SwipeRefreshLayout
+			android:id="@+id/main_swipe_refresh"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:orientation="vertical"
-			app:layoutManager="LinearLayoutManager"
-			app:publicFeedList="@{viewModel.items}"
-			tools:listitem="@layout/item_public_feed" />
+			android:layout_height="wrap_content"
+			app:loadingState="@{viewModel.loadingState}"
+			app:refreshAction="@{viewModel}">
+
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/main_recycler"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				app:layoutManager="LinearLayoutManager"
+				app:publicFeedList="@{viewModel.items}"
+				tools:listitem="@layout/item_public_feed" />
+		</android.support.v4.widget.SwipeRefreshLayout>
 	</android.support.design.widget.CoordinatorLayout>
 </layout>

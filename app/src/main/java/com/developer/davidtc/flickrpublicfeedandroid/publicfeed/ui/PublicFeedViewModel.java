@@ -22,6 +22,8 @@ public final class PublicFeedViewModel extends ViewModel {
     public final ObservableList<FeedItem> items = new ObservableArrayList<>();
     @SuppressWarnings("WeakerAccess") //Required for data binding
     public final ObservableField<Throwable> errorState = new ObservableField<>();
+    @SuppressWarnings("WeakerAccess") //Required for data binding
+    public final ObservableField<Boolean> loadingState = new ObservableField<>(false);
 
     private final PublicFeedRepository publicFeedRepository;
     private final CompositeDisposable compositeDisposable;
@@ -32,6 +34,7 @@ public final class PublicFeedViewModel extends ViewModel {
     }
 
     void refreshItems() {
+        loadingState.set(true);
         compositeDisposable.add(
                 publicFeedRepository.getItems()
                         .observeOn(AndroidSchedulers.mainThread())
@@ -41,6 +44,7 @@ public final class PublicFeedViewModel extends ViewModel {
                             if (feedItems != null) {
                                 items.addAll(feedItems);
                             }
+                            loadingState.set(false);
                         }));
     }
 

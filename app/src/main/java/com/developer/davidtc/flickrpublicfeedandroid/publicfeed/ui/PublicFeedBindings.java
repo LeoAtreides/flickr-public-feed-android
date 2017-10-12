@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -83,5 +84,15 @@ public final class PublicFeedBindings {
             Snackbar.make(view, R.string.error_loading, Snackbar.LENGTH_LONG)
                     .show();
         }
+    }
+
+    @BindingAdapter("refreshAction")
+    public static void bindRefreshAction(SwipeRefreshLayout view, PublicFeedViewModel viewModel) {
+        view.setOnRefreshListener(viewModel::refreshItems);
+    }
+
+    @BindingAdapter("loadingState")
+    public static void bindLoadingState(SwipeRefreshLayout view, boolean loadingState) {
+        view.setRefreshing(loadingState);
     }
 }
