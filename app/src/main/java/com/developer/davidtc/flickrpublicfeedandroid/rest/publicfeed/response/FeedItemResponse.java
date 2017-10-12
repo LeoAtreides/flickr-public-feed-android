@@ -24,6 +24,8 @@ public abstract class FeedItemResponse {
 
     public abstract String tags();
 
+    public abstract MediaResponse media();
+
     public static TypeAdapter<FeedItemResponse> typeAdapter(Gson gson) {
         return new AutoValue_FeedItemResponse.GsonTypeAdapter(gson);
     }
