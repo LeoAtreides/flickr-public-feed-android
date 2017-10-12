@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /** Data binding custom adapters.
@@ -44,5 +46,16 @@ public final class PublicFeedBindings {
             tagsBuilder.append(" ");
         }
         textView.setText(tagsBuilder.toString());
+    }
+
+    @BindingAdapter("itemDate")
+    public static void bindDate(TextView textView, Date date) {
+        if (date == null) {
+            textView.setText("");
+            return;
+        }
+        textView.setText(
+                SimpleDateFormat.getDateTimeInstance()
+                        .format(date));
     }
 }

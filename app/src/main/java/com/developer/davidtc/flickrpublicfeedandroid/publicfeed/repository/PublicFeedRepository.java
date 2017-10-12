@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
@@ -30,7 +31,7 @@ public final class PublicFeedRepository {
     private final DateFormat dateFormat;
 
     public PublicFeedRepository() {
-        dateFormat = SimpleDateFormat.getDateInstance();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
     }
 
     public Single<List<FeedItem>> getItems() {

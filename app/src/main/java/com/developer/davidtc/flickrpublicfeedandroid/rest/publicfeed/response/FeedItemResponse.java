@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Class for public feed item.
@@ -17,6 +18,7 @@ public abstract class FeedItemResponse {
 
     public abstract String link();
 
+    @SerializedName("published")
     @Nullable
     public abstract String publishedDate();
 
