@@ -1,12 +1,12 @@
 package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui;
 
 import android.arch.lifecycle.ViewModel;
+import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableList;
 
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem;
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.repository.PublicFeedRepository;
-
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -18,7 +18,9 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 
 public final class PublicFeedViewModel extends ViewModel {
-    public final ObservableField<List<FeedItem>> items = new ObservableField<>();
+    @SuppressWarnings("WeakerAccess") //Required for data binding
+    public final ObservableList<FeedItem> items = new ObservableArrayList<>();
+    @SuppressWarnings("WeakerAccess") //Required for data binding
     public final ObservableField<Throwable> errorState = new ObservableField<>();
 
     private final PublicFeedRepository publicFeedRepository;
@@ -34,7 +36,8 @@ public final class PublicFeedViewModel extends ViewModel {
                 publicFeedRepository.getItems()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe((feedItems, throwable) -> {
-                            items.set(feedItems);
+                            items.clear();
+                            items.addAll(feedItems);
                             errorState.set(throwable);
                         }));
     }
