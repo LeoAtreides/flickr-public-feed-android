@@ -5,6 +5,7 @@ import com.developer.davidtc.flickrpublicfeedandroid.rest.publicfeed.response.Pu
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Query;
 
 /**
  * Interface for public feed service.
@@ -18,5 +19,5 @@ public interface PublicFeedEndpoint {
             "uselessContent: jsonFlickrFeed(, ;}), }"
     })
     @GET("feeds/photos_public.gne")
-    Single<PublicFeedResponse> getPublicFeed();
+    Single<PublicFeedResponse> getPublicFeed(@Query("tags") String tags);
 }
