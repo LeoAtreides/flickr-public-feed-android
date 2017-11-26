@@ -17,11 +17,8 @@ import io.reactivex.disposables.CompositeDisposable
  */
 
 class PublicFeedViewModel : ViewModel() {
-	//Required for data binding
 	val items: ObservableList<FeedItem> = ObservableArrayList()
-	//Required for data binding
 	val errorState = ObservableField<Throwable>()
-	//Required for data binding
 	val loadingState = ObservableField(false)
 
 	private val publicFeedRepository: PublicFeedRepository = PublicFeedRepository()
