@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by david on 21/02/17.
  */
 
- final class DefaultGsonConverter {
+final class DefaultGsonConverter {
 
     private static GsonConverterFactory gsonConverter;
 
@@ -20,9 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
     static GsonConverterFactory getConverter() {
         if (gsonConverter == null) {
             gsonConverter = GsonConverterFactory.create(
-                    new GsonBuilder()
-                            .registerTypeAdapterFactory(AutoValueAdapterFactory.create())
-                            .create());
+                    new GsonBuilder().create());
         }
         return gsonConverter;
     }

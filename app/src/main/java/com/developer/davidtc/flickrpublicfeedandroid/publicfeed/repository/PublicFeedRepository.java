@@ -40,14 +40,14 @@ public final class PublicFeedRepository {
 
         return publicFeedEndpoint.getPublicFeed()
                 .toObservable()
-                .flatMapIterable(PublicFeedResponse::items)
+                .flatMapIterable(PublicFeedResponse::getItems)
                 .map(feedItemResponse ->
                         FeedItem.builder()
-                                .title(feedItemResponse.title())
-                                .imageUrl(feedItemResponse.media().mediaUrl())
-                                .link(feedItemResponse.link())
-                                .publishedDate(parseDate(feedItemResponse.publishedDate()))
-                                .author(buildAuthor(feedItemResponse.author()))
+                                .title(feedItemResponse.getTitle())
+                                .imageUrl(feedItemResponse.getMedia().getM())
+                                .link(feedItemResponse.getLink())
+                                .publishedDate(parseDate(feedItemResponse.getPublished()))
+                                .author(buildAuthor(feedItemResponse.getAuthor()))
                                 .tags(buildTags(feedItemResponse))
                                 .build())
                 .toList()
@@ -75,7 +75,7 @@ public final class PublicFeedRepository {
     }
 
     private List<String> buildTags(FeedItemResponse feedItemResponse) {
-        String[] split = feedItemResponse.tags().split(TAGS_SEPARATOR);
+        String[] split = feedItemResponse.getTags().split(TAGS_SEPARATOR);
         List<String> tags = new ArrayList<>(split.length);
         Collections.addAll(tags, split);
         return tags;
