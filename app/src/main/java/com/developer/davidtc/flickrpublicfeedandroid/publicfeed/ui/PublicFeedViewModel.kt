@@ -4,10 +4,8 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableField
 import android.databinding.ObservableList
-
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.repository.PublicFeedRepository
-
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -34,14 +32,17 @@ class PublicFeedViewModel : ViewModel() {
 		compositeDisposable.add(
 				publicFeedRepository.items
 						.observeOn(AndroidSchedulers.mainThread())
-						.subscribe { feedItems, throwable ->
-							errorState.set(throwable)
+						.subscribe({
 							items.clear()
-							if (feedItems != null) {
-								items.addAll(feedItems)
+							if (it != null) {
+								items.addAll(it)
 							}
 							loadingState.set(false)
-						})
+						},
+						{
+							errorState.set(it)
+							loadingState.set(false)
+						}))
 	}
 
 	override fun onCleared() {
