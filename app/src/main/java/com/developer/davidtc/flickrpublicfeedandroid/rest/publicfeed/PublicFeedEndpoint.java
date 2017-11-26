@@ -19,5 +19,5 @@ public interface PublicFeedEndpoint {
             "uselessContent: jsonFlickrFeed(, ;}), }"
     })
     @GET("feeds/photos_public.gne")
-    Single<PublicFeedResponse> getPublicFeed(@Query("tags") String tags);
+    Single<PublicFeedResponse> getPublicFeed();
 }

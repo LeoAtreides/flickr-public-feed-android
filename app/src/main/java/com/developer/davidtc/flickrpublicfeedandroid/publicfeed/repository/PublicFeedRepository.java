@@ -38,7 +38,7 @@ public final class PublicFeedRepository {
         PublicFeedEndpoint publicFeedEndpoint =
                 RetrofitServiceGenerator.generateService(PublicFeedEndpoint.class);
 
-        return publicFeedEndpoint.getPublicFeed("Sweden, Landscape")
+        return publicFeedEndpoint.getPublicFeed()
                 .toObservable()
                 .flatMapIterable(PublicFeedResponse::items)
                 .map(feedItemResponse ->
