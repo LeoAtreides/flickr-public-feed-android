@@ -42,14 +42,13 @@ public final class PublicFeedRepository {
                 .toObservable()
                 .flatMapIterable(PublicFeedResponse::getItems)
                 .map(feedItemResponse ->
-                        FeedItem.builder()
-                                .title(feedItemResponse.getTitle())
-                                .imageUrl(feedItemResponse.getMedia().getM())
-                                .link(feedItemResponse.getLink())
-                                .publishedDate(parseDate(feedItemResponse.getPublished()))
-                                .author(buildAuthor(feedItemResponse.getAuthor()))
-                                .tags(buildTags(feedItemResponse))
-                                .build())
+                        new FeedItem(
+                                feedItemResponse.getTitle(),
+                                feedItemResponse.getLink(),
+                                feedItemResponse.getMedia().getM(),
+                                parseDate(feedItemResponse.getPublished()),
+                                buildAuthor(feedItemResponse.getAuthor()),
+                                buildTags(feedItemResponse)))
                 .toList()
                 .subscribeOn(Schedulers.io());
     }
