@@ -27,7 +27,7 @@ class PublicFeedViewModel : ViewModel() {
 	fun refreshItems() {
 		loadingState.set(true)
 		compositeDisposable.add(
-				publicFeedRepository.items
+				publicFeedRepository.loadItems()
 						.observeOn(AndroidSchedulers.mainThread())
 						.subscribe({
 							items.clear()
