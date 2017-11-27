@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -13,7 +14,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-	    buildConfigField "String", "API_URL", "\"https://api.flickr.com/services/\""
+        buildConfigField "String", "API_URL", "\"https://api.flickr.com/services/\""
     }
     dataBinding {
         enabled = true
@@ -46,8 +47,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:3.9.0"
-    implementation'com.squareup.picasso:picasso:2.5.2'
-	implementation 'com.google.code.gson:gson:2.8.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.google.code.gson:gson:2.8.1'
 
     //rx
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
@@ -55,4 +56,5 @@ dependencies {
 
     //Kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    kapt 'com.android.databinding:compiler:3.0.1'
 }
