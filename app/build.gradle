@@ -7,13 +7,13 @@ android {
     buildToolsVersion "27.0.1"
     defaultConfig {
         applicationId "com.developer.davidtc.flickrpublicfeedandroid"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        multiDexEnabled true
         buildConfigField "String", "API_URL", "\"https://api.flickr.com/services/\""
     }
     dataBinding {
