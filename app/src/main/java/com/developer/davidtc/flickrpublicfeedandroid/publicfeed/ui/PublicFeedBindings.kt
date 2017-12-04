@@ -71,10 +71,9 @@ fun bindLaunchExternal(imageView: ImageView, link: String) {
 }
 
 @BindingAdapter("errorFeedback")
-fun bindErrorFeedback(view: View, errorState: Throwable?) {
-	if (errorState != null) {
-		Snackbar.make(view, R.string.error_loading, Snackbar.LENGTH_LONG)
-				.show()
+fun bindErrorFeedback(view: View, errorState: Boolean) {
+	when {
+		errorState -> Snackbar.make(view, R.string.error_loading, Snackbar.LENGTH_LONG).show()
 	}
 }
 

@@ -1,10 +1,7 @@
 package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui
 
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableArrayList
 import android.databinding.ObservableField
-import android.databinding.ObservableList
-import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.repository.PublicFeedRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,29 +14,23 @@ import io.reactivex.disposables.CompositeDisposable
  */
 
 class PublicFeedViewModel : ViewModel() {
-	val items: ObservableList<FeedItem> = ObservableArrayList()
-	val errorState = ObservableField<Throwable>()
-	val loadingState = ObservableField(false)
+
+	var viewState: ObservableField<PublicFeedViewState> = ObservableField(PublicFeedViewState())
 
 	private val publicFeedRepository: PublicFeedRepository = PublicFeedRepository()
 	private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
 	fun refreshItems() {
-		loadingState.set(true)
+		viewState.set(viewState.get().copy(loading = true))
 		compositeDisposable.add(
 				publicFeedRepository.loadItems()
 						.observeOn(AndroidSchedulers.mainThread())
 						.subscribe({
-							items.clear()
-							if (it != null) {
-								items.addAll(it)
-							}
-							loadingState.set(false)
+							viewState.set(PublicFeedViewState(loading = false, errorLoading = false, feedItems = it))
 						},
-						{
-							errorState.set(it)
-							loadingState.set(false)
-						}))
+								{
+									viewState.set(PublicFeedViewState(loading = false, errorLoading = true, feedItems = emptyList()))
+								}))
 	}
 
 	override fun onCleared() {
