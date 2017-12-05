@@ -1,5 +1,6 @@
 package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -17,5 +18,9 @@ class MainActivity : AppCompatActivity() {
 		binding.viewModel = publicFeedViewModel
 		setSupportActionBar(binding.mainToolbar)
 		publicFeedViewModel.refreshItems()
+
+		publicFeedViewModel.viewState.observe(this, Observer<PublicFeedViewState> {
+			it?.let { binding.viewState = it }
+		})
 	}
 }

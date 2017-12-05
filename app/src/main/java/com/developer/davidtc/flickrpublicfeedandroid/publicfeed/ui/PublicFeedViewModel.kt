@@ -1,7 +1,7 @@
 package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
 import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.repository.PublicFeedRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,21 +15,27 @@ import io.reactivex.disposables.CompositeDisposable
 
 class PublicFeedViewModel : ViewModel() {
 
-	var viewState: ObservableField<PublicFeedViewState> = ObservableField(PublicFeedViewState())
+	val viewState: MutableLiveData<PublicFeedViewState> = MutableLiveData()
 
 	private val publicFeedRepository: PublicFeedRepository = PublicFeedRepository()
 	private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
+	init {
+		viewState.value = PublicFeedViewState()
+	}
+
+	private fun currentViewState(): PublicFeedViewState = viewState.value!!
+
 	fun refreshItems() {
-		viewState.set(viewState.get().copy(loading = true))
+		viewState.value = currentViewState().copy(loading = true)
 		compositeDisposable.add(
 				publicFeedRepository.loadItems()
 						.observeOn(AndroidSchedulers.mainThread())
 						.subscribe({
-							viewState.set(PublicFeedViewState(loading = false, errorLoading = false, feedItems = it))
+							viewState.value = PublicFeedViewState(loading = false, errorLoading = false, feedItems = it)
 						},
 								{
-									viewState.set(PublicFeedViewState(loading = false, errorLoading = true, feedItems = emptyList()))
+									viewState.value = PublicFeedViewState(loading = false, errorLoading = true, feedItems = emptyList())
 								}))
 	}
 
