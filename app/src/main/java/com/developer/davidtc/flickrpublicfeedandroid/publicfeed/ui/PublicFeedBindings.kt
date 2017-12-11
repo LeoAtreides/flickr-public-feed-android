@@ -3,14 +3,8 @@ package com.developer.davidtc.flickrpublicfeedandroid.publicfeed.ui
 import android.content.Intent
 import android.databinding.BindingAdapter
 import android.net.Uri
-import android.support.design.widget.Snackbar
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.developer.davidtc.flickrpublicfeedandroid.R
-import com.developer.davidtc.flickrpublicfeedandroid.publicfeed.data.FeedItem
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
@@ -19,15 +13,6 @@ import java.util.*
  *
  * Created by david on 12/10/17.
  */
-
-@BindingAdapter("publicFeedList")
-fun bindList(recyclerView: RecyclerView, items: List<FeedItem>?) {
-	if (items == null || items.isEmpty()) {
-		recyclerView.adapter = null
-		return
-	}
-	recyclerView.adapter = FeedItemsAdapter(items, recyclerView.context)
-}
 
 @BindingAdapter("imageBind")
 fun bindImage(imageView: ImageView, imageUrl: String) {
@@ -68,21 +53,4 @@ fun bindLaunchExternal(imageView: ImageView, link: String) {
 			context.startActivity(intent)
 		}
 	}
-}
-
-@BindingAdapter("errorFeedback")
-fun bindErrorFeedback(view: View, errorState: Boolean) {
-	when {
-		errorState -> Snackbar.make(view, R.string.error_loading, Snackbar.LENGTH_LONG).show()
-	}
-}
-
-@BindingAdapter("refreshAction")
-fun bindRefreshAction(view: SwipeRefreshLayout, viewModel: PublicFeedViewModel) {
-	view.setOnRefreshListener({ viewModel.refreshItems() })
-}
-
-@BindingAdapter("loadingState")
-fun bindLoadingState(view: SwipeRefreshLayout, loadingState: Boolean) {
-	view.isRefreshing = loadingState
 }
