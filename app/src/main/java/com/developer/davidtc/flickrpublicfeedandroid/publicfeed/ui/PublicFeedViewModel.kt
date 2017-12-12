@@ -21,7 +21,7 @@ class PublicFeedViewModel : ViewModel() {
 	private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
 	fun refreshItems() {
-		viewState.set(viewState.get().copy(loading = true))
+		viewState.set(viewState.get()!!.copy(loading = true))
 		compositeDisposable.add(
 				publicFeedRepository.loadItems()
 						.observeOn(AndroidSchedulers.mainThread())
